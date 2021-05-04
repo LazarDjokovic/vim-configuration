@@ -25,6 +25,9 @@ Plug 'morhetz/gruvbox'
 
 call plug#end()
 
+" colorscheme gruvbox
+" set background=dark
+
 " NerdTree settings
 let g:NERDTreeWinSize=50
 let NERDTreeShowHidden=1
