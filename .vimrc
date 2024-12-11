@@ -1,34 +1,57 @@
-syntax on
+call plug#begin()
 
-set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-set nu
-set nowrap
-set smartcase
-set noswapfile
-set incsearch
+" Sensible defaults for Vim
+Plug 'tpope/vim-sensible'
 
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+" Fuzzy Finder for quick file and text search
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-call plug#begin('~/.vim/plugged')
+" NERDTree: Directory tree viewer
+Plug 'preservim/nerdtree'
 
-Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'valloric/youcompleteme'
-Plug 'stanangeloff/php.vim'
-Plug 'shawncplus/phpcomplete.vim'
+" Git integration
+Plug 'tpope/vim-fugitive'
+
+" Color scheme: Gruvbox
 Plug 'morhetz/gruvbox'
 
 call plug#end()
 
-" colorscheme gruvbox
-" set background=dark
+" Enable dark mode for Gruvbox
+set background=dark
+colorscheme gruvbox
 
-" NerdTree settings
-let g:NERDTreeWinSize=50
-let NERDTreeShowHidden=1
-" au VimEnter *  NERDTree
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <silent> K :call CocAction('hover')<CR>
+nnoremap <silent> <leader>o :CocList outline<CR>
+
+" TAB setting
+set autoindent noexpandtab tabstop=4 shiftwidth=4
+
+" Line numbers and toggling
+set number
+set relativenumber
+nnoremap <F2> :set relativenumber!<CR>
+
+" NERDTree mappings
+" Toggle NERDTree visibility with Ctrl+n
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+" Automatically open NERDTree when starting Vim in a directory
+autocmd VimEnter * if argc() == 0 && isdirectory(expand('%')) | NERDTree | wincmd p | endif
+
+" Close Vim if NERDTree is the last open window
+autocmd BufEnter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
+
+" FZF mappings
+nnoremap <C-S-f> :Files<CR>
+nnoremap <C-S-g> :Rg<Space>
+
+" Window navigation
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
