@@ -22,11 +22,6 @@ call plug#end()
 set background=dark
 colorscheme gruvbox
 
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gr <Plug>(coc-references)
-nnoremap <silent> K :call CocAction('hover')<CR>
-nnoremap <silent> <leader>o :CocList outline<CR>
-
 " TAB setting
 set autoindent noexpandtab tabstop=4 shiftwidth=4
 
